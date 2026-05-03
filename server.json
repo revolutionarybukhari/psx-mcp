@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.revolutionarybukhari/psx-mcp",
+  "title": "PSX MCP",
+  "description": "Pakistan Stock Exchange in plain English — quotes, dividends, announcements, and indices.",
+  "websiteUrl": "https://github.com/revolutionarybukhari/psx-mcp",
+  "repository": {
+    "url": "https://github.com/revolutionarybukhari/psx-mcp",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "psx-mcp",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

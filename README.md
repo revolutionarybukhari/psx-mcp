@@ -1,9 +1,13 @@
 # psx-mcp
 
 [![CI](https://github.com/revolutionarybukhari/psx-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/revolutionarybukhari/psx-mcp/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/psx-mcp)](https://pypi.org/project/psx-mcp/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-compatible-7c3aed)](https://modelcontextprotocol.io)
+
+<!-- mcp-name: io.github.revolutionarybukhari/psx-mcp -->
+mcp-name: io.github.revolutionarybukhari/psx-mcp
 
 **Talk to the Pakistan Stock Exchange in plain English.**
 
