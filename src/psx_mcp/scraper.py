@@ -14,11 +14,9 @@ For commercial redistribution, contact marketdatarequest@psx.com.pk.
 
 from __future__ import annotations
 
-import asyncio
 import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Optional
 
 import httpx
 from bs4 import BeautifulSoup
@@ -37,14 +35,14 @@ TIMEOUT = 30.0
 class Quote:
     symbol: str
     name: str
-    last: Optional[float]
-    change: Optional[float]
-    change_pct: Optional[float]
-    volume: Optional[int]
-    high: Optional[float]
-    low: Optional[float]
-    open: Optional[float]
-    prev_close: Optional[float]
+    last: float | None
+    change: float | None
+    change_pct: float | None
+    volume: int | None
+    high: float | None
+    low: float | None
+    open: float | None
+    prev_close: float | None
     timestamp: str
 
 
@@ -65,15 +63,15 @@ class Announcement:
     date: str
     symbol: str
     title: str
-    pdf_url: Optional[str]
+    pdf_url: str | None
 
 
 @dataclass
 class IndexValue:
     name: str
     value: float
-    change: Optional[float]
-    change_pct: Optional[float]
+    change: float | None
+    change_pct: float | None
 
 
 # ──────────────────────────── http helper ────────────────────────────
@@ -89,7 +87,7 @@ async def _get(client: httpx.AsyncClient, path: str) -> str:
     return r.text
 
 
-def _parse_float(s: str) -> Optional[float]:
+def _parse_float(s: str) -> float | None:
     if not s:
         return None
     cleaned = re.sub(r"[,%\s]", "", s).replace("(", "-").replace(")", "")
@@ -99,14 +97,14 @@ def _parse_float(s: str) -> Optional[float]:
         return None
 
 
-def _parse_int(s: str) -> Optional[int]:
+def _parse_int(s: str) -> int | None:
     f = _parse_float(s)
     return int(f) if f is not None else None
 
 
 # ──────────────────────────── quotes ────────────────────────────
 
-async def fetch_quote(symbol: str) -> Optional[Quote]:
+async def fetch_quote(symbol: str) -> Quote | None:
     """Fetch the current quote for a single symbol."""
     symbol = symbol.upper().strip()
     async with httpx.AsyncClient() as client:
@@ -175,8 +173,8 @@ async def fetch_payouts() -> list[Dividend]:
         if not headers:
             continue
 
-        def col(name_part: str) -> int:
-            for i, h in enumerate(headers):
+        def col(name_part: str, hs: list[str] = headers) -> int:
+            for i, h in enumerate(hs):
                 if name_part in h:
                     return i
             return -1
@@ -263,7 +261,7 @@ async def fetch_dividend_history(symbol: str, years: int = 5) -> list[Dividend]:
 
 # ──────────────────────────── announcements ────────────────────────────
 
-async def fetch_announcements(symbol: Optional[str] = None, limit: int = 20) -> list[Announcement]:
+async def fetch_announcements(symbol: str | None = None, limit: int = 20) -> list[Announcement]:
     """Fetch recent company announcements, optionally filtered by symbol."""
     async with httpx.AsyncClient() as client:
         html = await _get(client, "/announcements/companies")
@@ -327,7 +325,7 @@ async def fetch_indices() -> list[IndexValue]:
 # ──────────────────────────── symbol search ────────────────────────────
 
 _SYMBOL_CACHE: dict[str, str] = {}
-_CACHE_AT: Optional[datetime] = None
+_CACHE_AT: datetime | None = None
 
 
 async def fetch_all_symbols() -> dict[str, str]:

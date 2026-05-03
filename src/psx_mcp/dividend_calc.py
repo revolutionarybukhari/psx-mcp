@@ -8,7 +8,6 @@ execute at least 2 trading days before book closure begins.
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
-from typing import Optional
 
 # 2026 PSX trading holidays — verify against the official PSX calendar before relying.
 # Edit this list as PSX publishes the annual calendar.
@@ -22,7 +21,7 @@ PSX_HOLIDAYS_2026: set[str] = {
 }
 
 
-def parse_psx_date(s: str) -> Optional[date]:
+def parse_psx_date(s: str) -> date | None:
     """Be lenient — PSX renders dates in several formats."""
     if not s:
         return None

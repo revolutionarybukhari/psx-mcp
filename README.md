@@ -1,5 +1,10 @@
 # psx-mcp
 
+[![CI](https://github.com/revolutionarybukhari/psx-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/revolutionarybukhari/psx-mcp/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![MCP](https://img.shields.io/badge/MCP-compatible-7c3aed)](https://modelcontextprotocol.io)
+
 **Talk to the Pakistan Stock Exchange in plain English.**
 
 `psx-mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes PSX market data — quotes, dividends, announcements, indices — as tools any MCP-compatible AI client can call. Connect it to Claude Desktop, Cursor, ChatGPT, or your own agent, and ask questions like:

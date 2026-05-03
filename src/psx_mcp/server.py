@@ -19,13 +19,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
-from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
-from . import scraper
-from . import dividend_calc
+from . import dividend_calc, scraper
 
 mcp = FastMCP("psx-mcp")
 
@@ -63,7 +60,7 @@ async def get_quote(symbol: str) -> dict:
 
 
 @mcp.tool()
-async def get_upcoming_dividends(symbol: Optional[str] = None) -> list[dict]:
+async def get_upcoming_dividends(symbol: str | None = None) -> list[dict]:
     """
     List upcoming dividend payouts on PSX.
 
@@ -153,7 +150,7 @@ async def get_dividend_history(symbol: str, years: int = 5) -> list[dict]:
 
 
 @mcp.tool()
-async def get_announcements(symbol: Optional[str] = None, limit: int = 20) -> list[dict]:
+async def get_announcements(symbol: str | None = None, limit: int = 20) -> list[dict]:
     """
     Get recent corporate announcements from PSX.
 
