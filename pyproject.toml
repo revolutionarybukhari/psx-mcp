@@ -1,0 +1,46 @@
+[project]
+name = "psx-mcp"
+version = "0.1.0"
+description = "Model Context Protocol (MCP) server for the Pakistan Stock Exchange — exposes PSX market data, dividends, and announcements as LLM-callable tools."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "PSX Toolkit Contributors" }]
+requires-python = ">=3.10"
+keywords = ["psx", "pakistan", "stock-exchange", "mcp", "model-context-protocol", "claude", "finance"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "httpx>=0.27.0",
+    "beautifulsoup4>=4.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+psx-mcp = "psx_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/revolutionarybukhari/psx-mcp"
+Issues = "https://github.com/revolutionarybukhari/psx-mcp/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/psx_mcp"]
